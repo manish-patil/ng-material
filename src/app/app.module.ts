@@ -5,11 +5,13 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations"
 import { MaterialModule } from "./material.module";
 import { AppComponent } from './app.component';
 import { SearchComponent } from './search/search.component';
+import { SearchResultComponent } from './search-result/search-result.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SearchComponent
+    SearchComponent,
+    SearchResultComponent
   ],
   imports: [
     BrowserModule,

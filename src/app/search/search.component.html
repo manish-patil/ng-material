@@ -1,25 +1,26 @@
 <div class="example-container">
-  <mat-expansion-panel>
+  <mat-expansion-panel expanded style="margin:5px">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        Header
+        Search
       </mat-panel-title>
     </mat-expansion-panel-header>
     <div class="example-container">
-      <mat-form-field appearance="outline">
-        <mat-label>First Name</mat-label>
-        <input matInput placeholder="First Name">
-      </mat-form-field>
-
       <mat-form-field>
-        <input matInput placeholder="Last Name">
+        <mat-label>Element</mat-label>
+        <input matInput placeholder="Element" (keyup)="onSearch($event)">
       </mat-form-field>
-
-      <mat-form-field>
-        <mat-select placeholder="Select">
-          <mat-option value="option">Option</mat-option>
-        </mat-select>
-      </mat-form-field>
+    </div>
+  </mat-expansion-panel>
+  <mat-expansion-panel expanded style="margin:5px">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        List
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div>
+      <!-- <app-search-result [data]="dataSource"></app-search-result> -->
+      <app-search-result [data]="dataSource"></app-search-result>
     </div>
   </mat-expansion-panel>
 </div>
