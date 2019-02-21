@@ -1,26 +1,44 @@
-<div class="example-container">
+<div class="container">
   <mat-expansion-panel expanded style="margin:5px">
     <mat-expansion-panel-header>
       <mat-panel-title>
         Search
       </mat-panel-title>
     </mat-expansion-panel-header>
-    <div class="example-container">
+    <div clsss="filter-container">
       <mat-form-field>
         <mat-label>Element</mat-label>
-        <input matInput placeholder="Element" (keyup)="onSearch($event)">
+        <input matInput placeholder="Element" #element>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Symbol</mat-label>
+        <input matInput placeholder="Symbol" #symbol>
       </mat-form-field>
     </div>
+    <div class="search-container">
+      <button mat-raised-button (click)="onReset()">Reset</button>
+      <button mat-raised-button color="primary" (click)="onSearch()">Search</button>
+    </div>
   </mat-expansion-panel>
-  <mat-expansion-panel expanded style="margin:5px">
+  <mat-expansion-panel expanded style="margin:5px" (opened)="enableTableFormat = true"
+    (closed)="enableTableFormat = false">
     <mat-expansion-panel-header>
       <mat-panel-title>
         List
       </mat-panel-title>
     </mat-expansion-panel-header>
+    <!-- <div style="display: flex; flex-direction: row; align-items: center; justify-content: flex-end">
+      <button mat-icon-button [disabled]="!enableTableFormat" (click)="ontTableFormat()">
+        <mat-icon>list</mat-icon>
+      </button>
+    </div> -->
     <div>
-      <!-- <app-search-result [data]="dataSource"></app-search-result> -->
-      <app-search-result [data]="dataSource"></app-search-result>
+      <app-search-result [data]="dataSource" [displayColumns]="displayColumns"></app-search-result>
+    </div>
+    <div style="display: flex; flex-direction: row; align-items: center; justify-content: flex-start">
+      <button mat-icon-button [disabled]="!enableTableFormat" (click)="onpenTableFormatDialog()">
+        <mat-icon>list</mat-icon>
+      </button>
     </div>
   </mat-expansion-panel>
 </div>

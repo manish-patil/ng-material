@@ -1,19 +1,15 @@
 import { PeriodicElement } from './periodic-element';
 
 export class DataService {
-  getElements(filter: string) {
-
-    if (filter.length > 0) {
-      console.log('asdfadfads');
-
+  getElements(filterElement: string, filterSymbol: string) {
+    if ((filterElement.length + filterSymbol.length) > 0) {
       return ELEMENT_DATA.filter((element) => {
-        return element.name.toLowerCase().indexOf(filter.toLowerCase()) > -1;
+        return element.name.toLowerCase().indexOf(filterElement.toLowerCase()) > -1
+          && element.symbol.toLowerCase().indexOf(filterSymbol.toLowerCase()) > -1
       })
     } else {
       return ELEMENT_DATA;
     }
-
-    // return ELEMENT_DATA;
   }
 
   constructor() { }
