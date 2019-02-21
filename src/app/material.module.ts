@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import {
-    MatButtonModule, MatFormFieldModule, MatInputModule, MatSelectModule,
+    MatButtonModule, MatFormFieldModule, MatInputModule, MatListModule, MatCheckboxModule,
     MatExpansionModule, MatTableModule, MatPaginatorModule,
     MatIconModule,
 } from "@angular/material"
@@ -8,11 +8,11 @@ import {
 import { MatDialogModule } from "@angular/material/dialog";
 
 @NgModule({
-    imports: [MatButtonModule, MatFormFieldModule, MatInputModule, MatSelectModule,
+    imports: [MatButtonModule, MatFormFieldModule, MatInputModule, MatListModule, MatCheckboxModule,
         MatExpansionModule, MatTableModule, MatPaginatorModule,
         MatIconModule,
         MatDialogModule],
-    exports: [MatButtonModule, MatFormFieldModule, MatInputModule, MatSelectModule,
+    exports: [MatButtonModule, MatFormFieldModule, MatInputModule, MatListModule, MatCheckboxModule,
         MatExpansionModule,
         MatTableModule, MatPaginatorModule,
         MatIconModule,

@@ -1,8 +1,11 @@
-import { Component, OnInit, ElementRef, ViewChild, Inject } from '@angular/core';
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material';
 
 import { DataService } from '../data-service';
 import { PeriodicElement } from '../periodic-element';
+import { SearchConfigDialogComponent } from '../search-config-dialog/search-config-dialog.component';
+import { SearchConfig, SearchColumn } from '../search-config';
+import { SelectionModel } from '@angular/cdk/collections';
 
 @Component({
   selector: 'app-search',
@@ -13,6 +16,8 @@ import { PeriodicElement } from '../periodic-element';
 export class SearchComponent implements OnInit {
   dataSource: PeriodicElement[] = [];
   displayColumns: string[] = [];
+  selection = new SelectionModel<PeriodicElement>(true, []);
+  searchConfig: SearchConfig = { columns: [] };
   enableTableFormat: boolean = true;
   @ViewChild('element') inputElement: ElementRef;
   @ViewChild('symbol') inputSymbol: ElementRef;
@@ -30,28 +35,32 @@ export class SearchComponent implements OnInit {
     this.dataSource = this.dataService.getElements(this.inputElement.nativeElement.value, this.inputSymbol.nativeElement.value);
   }
 
-  onpenTableFormatDialog() {
-    console.log("ontTableFormat");
-    // this.dialog.open(DialogDataExampleDialog, {
-    //   data: {
-    //     displayCols: this.displayColumns
-    //   }
-    // });
+  openSearchConfigDialog() {
+    console.log("openSearchConfigDialog");
 
-    this.dialog.open(DialogDataExampleDialog);
+    const dialogRef = this.dialog.open(SearchConfigDialogComponent, {
+      width: '300px',
+      data: this.searchConfig.columns
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.displayColumns = [];
+
+      this.searchConfig.columns.map(column => {
+        if (column.displayColumn) {
+          this.displayColumns.push(column.displayColumnName)
+        }
+      })
+    });
   }
 
   ngOnInit() {
     this.dataSource = this.dataService.getElements('', '');
     this.displayColumns = ['name', 'position', 'weight', 'symbol'];
-  }
-}
 
-@Component({
-  selector: 'dialog-data-example-dialog',
-  templateUrl: 'dialog-data-example-dialog.html',
-})
-export class DialogDataExampleDialog {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: {}) { }
-  // constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+    this.searchConfig.columns.push({ displayColumnName: "name", displayColumnTitle: "Name", displayColumn: true })
+    this.searchConfig.columns.push({ displayColumnName: "position", displayColumnTitle: "Position", displayColumn: true })
+    this.searchConfig.columns.push({ displayColumnName: "weight", displayColumnTitle: "Weight", displayColumn: true })
+    this.searchConfig.columns.push({ displayColumnName: "symbol", displayColumnTitle: "Symbol", displayColumn: true })
+  }
 }

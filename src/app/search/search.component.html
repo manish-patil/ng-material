@@ -36,7 +36,7 @@
       <app-search-result [data]="dataSource" [displayColumns]="displayColumns"></app-search-result>
     </div>
     <div style="display: flex; flex-direction: row; align-items: center; justify-content: flex-start">
-      <button mat-icon-button [disabled]="!enableTableFormat" (click)="onpenTableFormatDialog()">
+      <button mat-icon-button [disabled]="!enableTableFormat" (click)="openSearchConfigDialog()">
         <mat-icon>list</mat-icon>
       </button>
     </div>

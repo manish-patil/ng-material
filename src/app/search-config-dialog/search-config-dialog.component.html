@@ -1,0 +1,14 @@
+<h2 mat-dialog-title>Select columns</h2>
+<mat-dialog-content>
+  <mat-list-item *ngFor="let column of data">
+    <div style="display: flex; flex-direction: row; align-items: center; justify-content:space-around">
+      <mat-checkbox [checked]="column.displayColumn" (change)="onChange($event)" [id]="column.displayColumnName">
+      </mat-checkbox>
+      <h4 mat-line>{{column.displayColumnTitle}}</h4>
+    </div>
+  </mat-list-item>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button (click)="onOk()">Ok</button>
+</mat-dialog-actions>
