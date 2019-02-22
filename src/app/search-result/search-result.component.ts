@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { PageEvent } from '@angular/material';
+import { Component, Input, OnInit, ViewChild, Output, AfterViewInit, EventEmitter } from '@angular/core';
+import { PageEvent, MatPaginator, MatSort } from '@angular/material';
 
 import { PeriodicElement } from '../periodic-element';
 
@@ -10,6 +10,8 @@ import { PeriodicElement } from '../periodic-element';
 })
 export class SearchResultComponent implements OnInit {
   columnDef: string[] = [];
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   @Input()
   data: PeriodicElement[];
@@ -17,16 +19,26 @@ export class SearchResultComponent implements OnInit {
   @Input()
   displayColumns: string[];
 
-  constructor() { }
+  @Input()
+  totalRecords: number;
 
-  ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
+  @Output()
+  searchChange = new EventEmitter()
 
+  constructor() {
     this.columnDef = ['position', 'name', 'weight', 'symbol'];
   }
 
+  ngOnInit() {
+    this.paginator.pageIndex = 0;
+  }
+
   onPageChange(e: PageEvent) {
-    console.log(e);
+    this.searchChange.emit({ sortColumn: this.sort.active, sortDirection: this.sort.direction, page: this.paginator.pageIndex });
+  }
+
+  onSortChange(e: PageEvent) {
+    this.paginator.pageIndex = 0;
+    this.searchChange.emit({ sortColumn: this.sort.active, sortDirection: this.sort.direction, page: this.paginator.pageIndex });
   }
 }

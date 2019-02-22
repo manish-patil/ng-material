@@ -27,16 +27,11 @@
         List
       </mat-panel-title>
     </mat-expansion-panel-header>
-    <!-- <div style="display: flex; flex-direction: row; align-items: center; justify-content: flex-end">
-      <button mat-icon-button [disabled]="!enableTableFormat" (click)="ontTableFormat()">
-        <mat-icon>list</mat-icon>
-      </button>
-    </div> -->
     <div>
-      <app-search-result [data]="dataSource" [displayColumns]="displayColumns"></app-search-result>
+      <app-search-result [data]="dataSource" [displayColumns]="displayColumns" [totalRecords]="totalRecords" (searchChange)="onSearchChange($event)"></app-search-result>
     </div>
-    <div style="display: flex; flex-direction: row; align-items: center; justify-content: flex-start">
-      <button mat-icon-button [disabled]="!enableTableFormat" (click)="openSearchConfigDialog()">
+    <div style=" display: flex; flex-direction: row; align-items: center; justify-content: flex-start">
+        <button mat-icon-button [disabled]="!enableTableFormat" (click)="openSearchConfigDialog()">
         <mat-icon>list</mat-icon>
       </button>
     </div>
